@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Search</title>
+    <link rel="stylesheet" href="/css/searchPage.css">
+</head>
+<body>
+<form th:method="POST" th:action="@{/main/search}">
+    <label for="label">Введите название техники</label>
+    <input type="text" id="label" name="label">
+    <input type="submit" value="Искать">
+</form>
+<a href="/main">На главную</a>
+</body>
+</html>

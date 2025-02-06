@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Item</title>
+    <link rel="stylesheet" href="/css/itemPage.css">
+</head>
+<body>
+<form th:object="${item}">
+    <p th:text="${item.get().getLabel()} + ' цена: '+${item.get().getPrice()}">item</p>
+    <a href="">Заказать</a>
+    <a href="/main/search">На страницу поиска</a>
+    <div th:if="${!shops.isEmpty()}">
+        <p>Заказать из магазина:</p>
+        <hr/>
+        <div th:each="shop : ${shops}">
+<!--            Через переход по ссылке магазина, заказать товар из выбранного магазина (Изменить адресс сылки ниже)-->
+            <a href="/shop/{id}" th:text="${shop.getAddress()}">Shop address</a>
+        </div>
+    </div>
+    <p th:if="${shops.isEmpty()}">Техники нет в наличии</p>
+</form>
+</body>
+</html>

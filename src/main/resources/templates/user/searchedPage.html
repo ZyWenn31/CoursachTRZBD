@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Searched page</title>
+    <link rel="stylesheet" href="/css/searchedPage.css">
+</head>
+<body>
+<form th:method="POST" th:action="@{/main/search}">
+    <label for="label">Введите название техники</label>
+    <input type="text" id="label" name="label">
+    <input type="submit" value="Искать">
+</form>
+<a href="/main">На главную</a>
+<hr/>
+<form th:if="${items.isEmpty()}">
+    <a style="color: red">Техника не найдена</a>
+</form>
+
+<form th:if="${!items.isEmpty()}">
+    <p>Результат поиска</p>
+<div th:each="item : ${items}">
+    <a th:href="@{itemInfo/{id}(id = ${item.getItem_id()})}"
+        th:text="${item.getLabel()}">Item</a>
+</div>
+</form>
+<hr/>
+</body>
+</html>

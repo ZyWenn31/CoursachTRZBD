@@ -1,0 +1,49 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #eef5ff; /* Светло-голубой фон */
+    color: #002244; /* Глубокий темно-синий */
+    text-align: center;
+    padding: 20px;
+}
+
+form {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 51, 0.2);
+    display: inline-block;
+    margin: 20px auto;
+}
+
+p {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #003366;
+}
+
+a {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 16px;
+    color: #0077cc;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 8px 12px;
+    border-radius: 5px;
+    background-color: #e0f2ff;
+    transition: background-color 0.3s;
+}
+
+a:hover {
+    background-color: #cce5ff;
+}
+
+hr {
+    border: 1px solid #003366;
+    margin: 20px 0;
+}
+
+div {
+    margin-top: 15px;
+}
