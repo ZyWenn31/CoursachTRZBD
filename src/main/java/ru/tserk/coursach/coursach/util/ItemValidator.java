@@ -30,6 +30,5 @@ public class ItemValidator implements Validator {
         else {
             return;
         }
-        System.out.println("sdsdsddssdsssdsds");
     }
 }

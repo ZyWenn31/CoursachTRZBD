@@ -8,7 +8,12 @@
 <body>
 <form th:object="${item}">
     <p th:text="${item.get().getLabel()} + ' цена: '+${item.get().getPrice()}">item</p>
-    <a href="">Заказать</a>
+    <br/>
+    <p>Оценка:</p>
+    <br/>
+    <a href="">Отзывы</a>
+    <p>Описание:</p>
+    <p th:text="${item.get().getDescription()}"></p>
     <a href="/main/search">На страницу поиска</a>
     <div th:if="${!shops.isEmpty()}">
         <p>Заказать из магазина:</p>

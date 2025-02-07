@@ -9,6 +9,6 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface ShopItemRepository extends JpaRepository<ShopItem, Integer> {
+public interface  ShopItemRepository extends JpaRepository<ShopItem, Integer> {
     List<ShopItem> findAllByItId(Optional<Item> itId);
 }

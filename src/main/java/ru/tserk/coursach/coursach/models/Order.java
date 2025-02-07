@@ -26,6 +26,9 @@ public class Order {
     @OneToMany(mappedBy = "order_id")
     private List<OrderItem> orderItemList = new ArrayList<>();
 
+    @Column(name = "order_status")
+    private String order_status;
+
     public Order() {
     }
 
@@ -59,6 +62,14 @@ public class Order {
 
     public void setOrderItemList(List<OrderItem> orderItemList) {
         this.orderItemList = orderItemList;
+    }
+
+    public String getOrder_status() {
+        return order_status;
+    }
+
+    public void setOrder_status(String order_status) {
+        this.order_status = order_status;
     }
 
     @Override

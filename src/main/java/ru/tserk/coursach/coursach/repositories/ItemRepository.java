@@ -10,5 +10,5 @@ import java.util.Optional;
 @Repository
 public interface ItemRepository extends JpaRepository<Item, Integer> {
     Optional<Item> findByLabel(String label);
-    List<Item> findByLabelStartingWith(String label);
+    List<Item>  findByLabelStartingWith(String label);
 }

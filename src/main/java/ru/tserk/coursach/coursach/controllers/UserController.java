@@ -49,8 +49,6 @@ public class UserController {
                                  Model model){
         model.addAttribute("items", itemService.searchItemByLabel(item_label));
 
-        System.out.println(888);
-
         return "user/searchedPage";
     }
 

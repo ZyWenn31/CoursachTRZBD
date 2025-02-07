@@ -20,6 +20,7 @@ p {
     font-weight: bold;
     margin-bottom: 10px;
     color: #003366;
+    white-space: pre-wrap;
 }
 
 a {

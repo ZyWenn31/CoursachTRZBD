@@ -40,7 +40,7 @@ public class ItemsController {
 
     //ДОБАВИТЬ ПРОСМОТОР ВСЕХ СОЗДАННЫХ ТОВАРОВ
     @PostMapping("/add")
-    public String postNewItem(@ModelAttribute("item") Item item, BindingResult bindingResult){
+    public String postNewItem(@ModelAttribute("item")@Valid Item item, BindingResult bindingResult){
         itemValidator.validate(item, bindingResult);
         if (bindingResult.hasErrors()){
             return "items/newItem";
