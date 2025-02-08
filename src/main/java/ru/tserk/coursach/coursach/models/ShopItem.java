@@ -20,7 +20,7 @@ public class ShopItem {
     private Item itId;
 
     @Column(name = "count")
-    private Integer count;
+    private int count;
 
     public ShopItem() {
     }
@@ -55,11 +55,11 @@ public class ShopItem {
         this.itId = item_id;
     }
 
-    public Integer getCount() {
+    public int getCount() {
         return count;
     }
 
-    public void setCount(Integer count) {
+    public void setCount(int count) {
         this.count = count;
     }
 

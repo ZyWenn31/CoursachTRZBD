@@ -20,7 +20,7 @@ public class OrderItem {
     private Order order_id;
 
     @Column(name = "count")
-    private Integer count;
+    private int count;
 
     @Column(name = "shop_id")
     private Integer shop_id;
@@ -60,7 +60,7 @@ public class OrderItem {
         this.order_id = order_id;
     }
 
-    public Integer getCount() {
+    public int getCount() {
         return count;
     }
 

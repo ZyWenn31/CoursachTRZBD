@@ -37,4 +37,9 @@ public class ItemService {
         }
         return itemRepository.findByLabelStartingWith(item_label);
     }
+
+    @Transactional
+    public void delete(int id){
+        itemRepository.deleteById(id);
+    }
 }

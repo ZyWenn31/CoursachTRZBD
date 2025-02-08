@@ -1,7 +1,8 @@
 package ru.tserk.coursach.coursach.models;
 
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
@@ -17,46 +18,37 @@ public class Item {
     @Column(name = "item_id")
     private int item_id;
 
-    @NotEmpty(message = "Название не может быть пустым")
+    @NotEmpty(message = "Название товара не может быть пустым")
     @Column(name = "item_label")
     private String label;
 
-    @NotEmpty(message = "Введите цену товара")
-    @Min(value = 1, message = "Цена не может быть ниже чем 1")
+    @NotNull(message = "Введите цену товара")
     @Column(name = "price")
-    private int price;
+    private Integer item_price;
 
     @NotEmpty(message = "Описание не может быть пустым")
     @Column(name = "description")
     private String description;
 
-    //Возможно сделать в виде выпадающего списка
-    @NotEmpty(message = "Укажите категорию")
-    @Column(name = "category")
-    private String category;
+    @NotNull(message = "Укажите категорию")
+    @ManyToOne
+    @JoinColumn(name = "category", referencedColumnName = "category_id")
+    private Category category_id;
 
     @OneToMany(mappedBy = "itemId")
     private List<OrderItem> orderItemList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "itId")
+    @OneToMany(mappedBy = "itId", cascade = CascadeType.REMOVE)
     private List<ShopItem> shopItemList = new ArrayList<>();
+
 
     public Item() {
     }
 
-    public Item(String label, int price, String description, String category) {
+    public Item(String label, int item_price, String description) {
         this.label = label;
-        this.price = price;
+        this.item_price = item_price;
         this.description = description;
-        this.category = category;
-    }
-
-    public List<ShopItem> getShopItemList() {
-        return shopItemList;
-    }
-
-    public void setShopItemList(List<ShopItem> shopItemList) {
-        this.shopItemList = shopItemList;
     }
 
     public int getItem_id() {
@@ -67,14 +59,6 @@ public class Item {
         this.item_id = item_id;
     }
 
-    public  String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public String getLabel() {
         return label;
     }
@@ -83,21 +67,28 @@ public class Item {
         this.label = label;
     }
 
-
-    public int getPrice() {
-        return price;
+    public Integer getItem_price() {
+        return item_price;
     }
 
-    public void setPrice(int price) {
-        this.price = price;
+    public void setItem_price(Integer price) {
+        this.item_price = price;
     }
 
-    public  String getCategory() {
-        return category;
+    public String getDescription() {
+        return description;
     }
 
-    public void setCategory( String category) {
-        this.category = category;
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Category getCategory_id() {
+        return category_id;
+    }
+
+    public void setCategory_id( Category category_id) {
+        this.category_id = category_id;
     }
 
     public List<OrderItem> getOrderItemList() {
@@ -108,12 +99,22 @@ public class Item {
         this.orderItemList = orderItemList;
     }
 
+    public List<ShopItem> getShopItemList() {
+        return shopItemList;
+    }
+
+    public void setShopItemList(List<ShopItem> shopItemList) {
+        this.shopItemList = shopItemList;
+    }
+
     @Override
     public String toString() {
         return "Item{" +
                 "item_id=" + item_id +
-                ", item_label='" + label + '\'' +
-                ", price=" + price +
+                ", label='" + label + '\'' +
+                ", item_price=" + item_price +
+                ", description='" + description + '\'' +
+                ", category_id=" + category_id +
                 '}';
     }
 
@@ -122,11 +123,11 @@ public class Item {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Item item = (Item) o;
-        return item_id == item.item_id && price == item.price && Objects.equals(label, item.label) && Objects.equals(description, item.description) && Objects.equals(category, item.category);
+        return item_id == item.item_id && Objects.equals(label, item.label) && Objects.equals(item_price, item.item_price) && Objects.equals(description, item.description) && Objects.equals(category_id, item.category_id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(item_id, label, price, description, category);
+        return Objects.hash(item_id, label, item_price, description, category_id);
     }
 }
