@@ -5,31 +5,30 @@
     <title>Title</title>
 </head>
 <body>
-<form th:object="${item}" action="/items/add" th:method="POST">
+<form th:object="${item}" th:action="@{/items/edit/{id}(id = ${item.getItem_id()})}" th:method="POST">
     <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
-    <label for="label">Введите название техники</label>
+    <label for="label">Название техники</label>
     <input type="text" id="label" th:field="*{label}"/>
     <div style="color: red" th:if="${#fields.hasErrors('label')}" th:errors="*{label}">item_label errors</div>
     <br/>
-    <label for="item_price">Введите цену техники</label>
-    <input type="text" id="item_price" th:field="*{item_price}">
+    <label for="item_price">Цену техники</label>
+    <input type="text" id="item_price" th:field="*{item_price}" >
     <div style="color: red" th:if="${#fields.hasErrors('item_price')}" th:errors="*{item_price}">price errors</div>
     <br/>
 
     <label for="category">Введите Категорию техники техники</label>
-    <select th:object="${item}" th:field="*{category_id}" id="category">
+    <select th:object="${item}" th:field="*{category_id}" id="category" >
         <option th:each="category : ${categories}" th:value="${category.getCategory_id()}" th:text="${category.getCategory_title()}"></option>
     </select>
     <div style="color: red" th:if="${#fields.hasErrors('category_id')}" th:errors="*{category_id}">category errors</div>
 
 
     <br/>
-    <label for="description">Введите описание техники</label>
-    <input type="text" id="description" th:field="*{description}">
+    <label for="description">Описание техники</label>
+    <input type="text" id="description" th:field="*{description}" >
     <div style="color: red" th:if="${#fields.hasErrors('description')}" th:errors="*{description}">description errors</div>
     <br/>
     <input type="submit" value="Создать">
 </form>
-<a href="/items">Назад</a>
 </body>
 </html>

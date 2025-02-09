@@ -7,14 +7,15 @@
 </head>
 <body>
 <form th:object="${item}">
-    <p th:text="${item.get().getLabel()} + ' цена: '+${item.get().getItem_price()}">item</p>
-    <p th:text="'Категория: ' + ${item.get().getCategory_id().getCategory_title()}"></p>
+    <p th:text="'Название техники: ' + ${item.getLabel()} + ' | цена: '+${item.getItem_price()}">item</p>
+    <p th:text="'Категория: ' + ${item.getCategory_id().getCategory_title()}"></p>
+<!--    <p th:if="${item.get().getCategory_id() == null}">Категория не указана</p>-->
     <br/>
     <p>Оценка:</p>
     <br/>
     <a href="">Отзывы</a>
     <p>Описание:</p>
-    <p th:text="${item.get().getDescription()}"></p>
+    <p th:text="${item.getDescription()}"></p>
     <a href="/main/search">На страницу поиска</a>
     <div th:if="${!shops.isEmpty()}">
         <p>Заказать из магазина:</p>

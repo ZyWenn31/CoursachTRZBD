@@ -6,13 +6,14 @@
     <link rel="stylesheet" href="/css/itemPage.css">
 </head>
 <body>
-<form th:object="${item}" th:action="@{/items/del/{id}(id = ${item.get().getItem_id()})}" th:method="POST">
+<form th:object="${item}" th:action="@{/items/del/{id}(id = ${item.getItem_id()})}" th:method="POST">
     <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
     <input type="submit" value="Удалить">
 </form>
 <form th:object="${item}">
-    <p th:text="${item.get().getLabel()} + ' цена: '+${item.get().getItem_price()}">item</p>
-    <p th:text="'Категория: ' + ${item.get().getCategory_id().getCategory_title()}"></p>
+    <p th:text="'Номер товара: ' + ${item.getItem_id()}">item</p>
+    <p th:text="'Название: '+${item.getLabel()} + ' цена: '+${item.getItem_price()}"></p>
+    <p th:text="'Категория: ' + ${item.getCategory_id().getCategory_title()}"></p>
     <br/>
     <p>Оценка:</p>
     <br/>

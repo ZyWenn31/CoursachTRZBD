@@ -10,5 +10,5 @@ import java.util.Optional;
 
 @Repository
 public interface  ShopItemRepository extends JpaRepository<ShopItem, Integer> {
-    List<ShopItem> findAllByItId(Optional<Item> itId);
+    List<ShopItem> findAllByItId(Item itId);
 }

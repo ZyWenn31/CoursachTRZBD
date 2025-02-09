@@ -27,8 +27,8 @@ public class ItemService {
         itemRepository.save(item);
     }
 
-    public Optional<Item> findOneItem(int id){
-        return itemRepository.findById(id);
+    public Item findOneItem(int id){
+        return itemRepository.findById(id).orElse(null);
     }
 
     public List<Item> searchItemByLabel(String item_label){
@@ -41,5 +41,17 @@ public class ItemService {
     @Transactional
     public void delete(int id){
         itemRepository.deleteById(id);
+    }
+
+    @Transactional
+    public void updateItem(int id, Item itemFields){
+        Item existingItem = itemRepository.findById(id).orElse(null);
+
+        existingItem.setItem_price(itemFields.getItem_price());
+        existingItem.setCategory_id(itemFields.getCategory_id());
+        existingItem.setDescription(itemFields.getDescription());
+        existingItem.setLabel(itemFields.getLabel());
+
+        itemRepository.save(existingItem);
     }
 }

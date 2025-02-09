@@ -5,7 +5,7 @@
     <title>Title</title>
 </head>
 <body>
-<form th:method="POST" th:action="@{/items/del}">
+<form th:method="POST" th:action="@{/items/edit}">
     <label for="label">Введите название техники</label>
     <input type="text" id="label" name="label">
     <input type="submit" value="Искать">
@@ -18,9 +18,9 @@
 </form>
 
 <form th:if="${!items.isEmpty()}">
-    <p>Выберите технику для удаления</p>
+    <p>Выберите технику для редактирования</p>
     <div th:each="item : ${items}">
-        <a th:href="@{/items/del/{id}(id = ${item.getItem_id()})}"
+        <a th:href="@{/items/edit/{id}(id = ${item.getItem_id()})}"
            th:text="${item.getLabel()} +' | ID: '+ ${item.getItem_id()}">Item</a>
     </div>
 </form>

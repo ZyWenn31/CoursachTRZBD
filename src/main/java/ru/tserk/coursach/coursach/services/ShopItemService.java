@@ -17,7 +17,7 @@ public class ShopItemService {
         this.shopItemRepository = shopItemRepository;
     }
 
-    public List<ShopItem> findAllByItem(Optional<Item> item){
+    public List<ShopItem> findAllByItem(Item item){
         return shopItemRepository.findAllByItId(item);
     }
 }
