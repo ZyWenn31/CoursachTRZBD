@@ -31,9 +31,11 @@ public class ShopItemService {
     public void saveShopItem(ShopItem shopItem, Shop shop, Item item){
         if (shopItemRepository.findShopItemByItIdAndSId(item, shop).isPresent()){
             ShopItem shopItem1 = shopItemRepository.findShopItemByItIdAndSId(item, shop).orElse(null);
-            
+            shopItem1.setCount(shopItem1.getCount() + shopItem.getCount());
+            shopItemRepository.save(shopItem1);
         }
-
-        shopItemRepository.save(shopItem);
+        else{
+            shopItemRepository.save(shopItem);
+        }
     }
 }

@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.tserk.coursach.coursach.models.Item;
+import ru.tserk.coursach.coursach.models.ShopItem;
 import ru.tserk.coursach.coursach.services.CategoryService;
 import ru.tserk.coursach.coursach.services.ItemService;
 import ru.tserk.coursach.coursach.services.ShopItemService;
@@ -164,9 +165,9 @@ public class ItemsController {
 
 
     @PostMapping("/up/{id}/add/search/{itemId}")
-    public String addItemInShopPost(@PathVariable("id")int id, @PathVariable("itemId") int itemId, Model model){
-
-        return "items/distribute/add/addPage";
+    public String addItemInShopPost(@PathVariable("id")int id, @PathVariable("itemId") int itemId, @RequestParam("count") int count, Model model){
+        shopItemService.saveShopItem(new ShopItem(shopService.findShopById(id),itemService.findOneItem(itemId), count), shopService.findShopById(id), itemService.findOneItem(itemId));
+        return "redirect:/items/up/"+id;
     }
 
 }
