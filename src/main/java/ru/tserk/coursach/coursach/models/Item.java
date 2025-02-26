@@ -41,6 +41,9 @@ public class Item {
     @OneToMany(mappedBy = "itId", cascade = CascadeType.REMOVE)
     private List<ShopItem> shopItemList = new ArrayList<>();
 
+    @OneToMany(mappedBy = "item_id")
+    private List<Cart_item> cartItemList = new ArrayList<>();
+
 
     public Item() {
     }
@@ -105,6 +108,14 @@ public class Item {
 
     public void setShopItemList(List<ShopItem> shopItemList) {
         this.shopItemList = shopItemList;
+    }
+
+    public List<Cart_item> getCartItemList() {
+        return cartItemList;
+    }
+
+    public void setCartItemList(List<Cart_item> cartItemList) {
+        this.cartItemList = cartItemList;
     }
 
     @Override

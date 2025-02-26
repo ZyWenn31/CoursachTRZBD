@@ -22,10 +22,6 @@ public class OrderItem {
     @Column(name = "count")
     private int count;
 
-    @Column(name = "shop_id")
-    private Integer shop_id;
-
-
     public OrderItem() {
     }
 
@@ -33,7 +29,6 @@ public class OrderItem {
         this.itemId = itemId;
         this.order_id = order_id;
         this.count = count;
-        this.shop_id = shop_id;
     }
 
     public int getId() {
@@ -68,14 +63,6 @@ public class OrderItem {
         this.count = count;
     }
 
-    public Integer getShop_id() {
-        return shop_id;
-    }
-
-    public void setShop_id(int shop_id) {
-        this.shop_id = shop_id;
-    }
-
     @Override
     public String toString() {
         return "OrderItem{" +
@@ -83,7 +70,6 @@ public class OrderItem {
                 ", item_id=" + itemId +
                 ", order_id=" + order_id +
                 ", count=" + count +
-                ", shop_id=" + shop_id +
                 '}';
     }
 }

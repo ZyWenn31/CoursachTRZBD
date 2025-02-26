@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Item</title>
+</head>
+<body>
+<p th:text="'Адрес магазина: ' + ${thisShop.getAddress()}"></p>
+<p th:text="'Техника: ' + ${item.getLabel()} + ' | Категория: ' + ${item.getCategory_id().getCategory_title()} + ' | Стоимость: ' + ${item.getItem_price()}"></p>
+<hr/>
+<form th:method="POST" th:action="@{/items/up/{id}/add/search/{itemId}(id = ${thisShop.getShop_id()}, itemId = ${item.getItem_id()})}">
+    <label for="count" > Введите количество поступившего товара: </label>
+    <input type="number" name="count" id="count" min="1" max="1000">
+    <input type="submit" value="Добавить товар">
+</form>
+</body>
+</html>

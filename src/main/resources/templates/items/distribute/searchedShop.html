@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:method="POST" th:action="@{/items/up}">
+    <label for="label">Введите адрес магазина</label>
+    <input type="text" id="label" name="address">
+    <input type="submit" value="Искать">
+</form>
+<a href="/items">Назад</a>
+</body>
+
+<hr/>
+
+<form th:if="${shops.isEmpty()}">
+    <a style="color: red">Магазин не найден</a>
+</form>
+
+<form th:if="${!shops.isEmpty()}">
+    <p>Выберите магазин</p>
+    <div th:each="shop : ${shops}">
+        <a th:href="@{up/{id}(id = ${shop.getShop_id()})}"
+           th:text="${shop.getAddress()} +' | director: '+ ${shop.getDirector_name()}"></a>
+    </div>
+</form>
+</html>

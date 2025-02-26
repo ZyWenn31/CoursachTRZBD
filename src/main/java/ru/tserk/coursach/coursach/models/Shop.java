@@ -24,8 +24,7 @@ public class  Shop {
     @OneToMany(mappedBy = "shop_id")
     private List<Order> orders = new ArrayList<>();
 
-
-    @OneToMany(mappedBy = "shop_id")
+    @OneToMany(mappedBy = "SId")
     private List<ShopItem> shopItemList = new ArrayList<>();
 
     public Shop() {

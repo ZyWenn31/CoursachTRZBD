@@ -20,9 +20,6 @@ public class Person {
     @Column(name = "username")
     private String username;
 
-//    @NotEmpty(message = "Возраст не может быть пустым")
-//    @Min(value = 9, message = "Возраст должен быть больше 9 лет")
-//    @Max(value = 110, message = "Возраст должен быть меньше 110 лет")
     @Column(name = "age")
     private Integer age;
 
@@ -35,6 +32,9 @@ public class Person {
 
     @OneToMany(mappedBy = "person_id")
     private List<Order> orders = new ArrayList<>();
+
+    @OneToOne(mappedBy = "person_id")
+    private Cart cart;
 
     public Person() {
     }

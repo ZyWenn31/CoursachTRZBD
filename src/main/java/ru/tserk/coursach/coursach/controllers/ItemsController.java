@@ -63,8 +63,6 @@ public class ItemsController {
         return "redirect:/items/add";
     }
 
-
-
     //Страница удаление товара
     @GetMapping("/del")
     public String delSearchPage(){
@@ -89,7 +87,6 @@ public class ItemsController {
         itemService.delete(id);
         return "redirect:/items/del";
     }
-
 
     //Страница редактирования товара
     @GetMapping("/edit")
@@ -117,7 +114,6 @@ public class ItemsController {
         if (bindingResult.hasErrors()){
             item.setItem_id(id);
             model.addAttribute("categories", categoryService.findAll());
-//            model.addAttribute("item", itemService.findOneItem(id));
             return "items/itemPreEditInfo";
         }
 
@@ -125,4 +121,52 @@ public class ItemsController {
 
         return "redirect:/items/edit";
     }
+
+    @GetMapping("/up")
+    public String distributeAdd(){
+        return "items/distribute/chooseShop";
+    }
+
+    @PostMapping("/up")
+    public String postSearchShop(@RequestParam("address") String address, Model model){
+        model.addAttribute("shops", shopService.searchShopByAddress(address));
+        return "items/distribute/searchedShop";
+    }
+
+    @GetMapping("/up/{id}")
+    public String ShopItemPage(@PathVariable("id") int id, Model model){
+        model.addAttribute("shopItems",
+                shopItemService.findShopItemsByShopId(shopService.findShopById(id)));
+        model.addAttribute("thisShop", shopService.findShopById(id));
+        return "items/distribute/ShopItemPage";
+    }
+
+    @GetMapping("/up/{id}/add/search")
+    public String searchItem(@PathVariable("id")int id, Model model){
+        model.addAttribute("thisShop", shopService.findShopById(id));
+        return "items/distribute/SearchItemPage";
+    }
+
+    @PostMapping("/up/{id}/add/search")
+    public String searchedItem(@PathVariable("id")int id, Model model, @RequestParam("label") String label){
+        model.addAttribute("items", itemService.searchItemByLabel(label));
+        model.addAttribute("thisShop", shopService.findShopById(id));
+        return "items/distribute/SearchedItemPage";
+    }
+
+
+    @GetMapping("/up/{id}/add/search/{itemId}")
+    public String addItemInShop(@PathVariable("id")int id, @PathVariable("itemId") int itemId, Model model){
+        model.addAttribute("thisShop", shopService.findShopById(id));
+        model.addAttribute("item", itemService.findOneItem(itemId));
+        return "items/distribute/add/addPage";
+    }
+
+
+    @PostMapping("/up/{id}/add/search/{itemId}")
+    public String addItemInShopPost(@PathVariable("id")int id, @PathVariable("itemId") int itemId, Model model){
+
+        return "items/distribute/add/addPage";
+    }
+
 }

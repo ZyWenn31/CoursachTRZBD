@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ShopItemPage</title>
+</head>
+<body>
+
+    <form th:action="@{{id}/add/search(id = ${thisShop.getShop_id()})}" th:object="${thisShop}">
+        <input type="submit" value="Добавить товар">
+    </form>
+
+    <form th:action="@{{id}/delete(id = ${thisShop.getShop_id()})}" th:object="${thisShop}">
+        <input type="submit" value="Удалить товар">
+    </form>
+    <br/>
+    <a href="/items/up">На страницу поиска</a>
+
+<hr/>
+<p>Техника, в наличии в данном магазине:</p>
+
+<form th:if="${shopItems.isEmpty()}">
+    <a style="color: red">В магазине нет ни одной техники</a>
+</form>
+
+<form th:if="${!shopItems.isEmpty()}">
+    <div  th:each="shopItem : ${shopItems}">
+        <a th:text="${shopItem.getItem_id().getLabel()} +
+        ' | Стоимость: ' + ${shopItem.getItem_id().getItem_price()} +
+        ' | Количество товара в магазине: ' + ${shopItem.getCount()}" ></a>
+    </div>
+</form>
+</body>
+</html>
