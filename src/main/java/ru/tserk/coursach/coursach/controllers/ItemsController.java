@@ -165,8 +165,28 @@ public class ItemsController {
 
 
     @PostMapping("/up/{id}/add/search/{itemId}")
-    public String addItemInShopPost(@PathVariable("id")int id, @PathVariable("itemId") int itemId, @RequestParam("count") int count, Model model){
+    public String addItemInShopPost(@PathVariable("id")int id, @PathVariable("itemId") int itemId, @RequestParam("count") int count){
         shopItemService.saveShopItem(new ShopItem(shopService.findShopById(id),itemService.findOneItem(itemId), count), shopService.findShopById(id), itemService.findOneItem(itemId));
+        return "redirect:/items/up/"+id;
+    }
+
+    @GetMapping("/up/{id}/delete")
+    public String deletePage(@PathVariable("id")int id, Model model){
+        model.addAttribute("thisShop", shopService.findShopById(id));
+        model.addAttribute("ShopItems", shopItemService.findAllShopItemByShopId(shopService.findShopById(id)));
+        return "items/distribute/PreDeletePage";
+    }
+
+    @GetMapping("/up/{id}/delete/{itemId}")
+    public String deleteShopItemPage (@PathVariable("id")int id, @PathVariable("itemId") int shopItemId, Model model){
+        model.addAttribute("shopItem", shopItemService.findShopItemById(shopItemId));
+        model.addAttribute("thisShop", shopService.findShopById(id));
+        return "items/distribute/delete/deletePage";
+    }
+
+    @PostMapping("/up/{id}/delete/{itemId}")
+    public String DeleteShopItem(@PathVariable("id")int id, @PathVariable("itemId") int shopItemId, @RequestParam("count") int count){
+        shopItemService.deleteShopItem(count, shopItemId);
         return "redirect:/items/up/"+id;
     }
 

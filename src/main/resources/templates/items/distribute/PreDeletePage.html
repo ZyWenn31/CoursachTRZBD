@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Pre Delete</title>
+</head>
+<body>
+<a th:href="@{/items/up/{id}(id = ${thisShop.getShop_id()})}">На страницу магазина</a>
+<form th:if="${ShopItems.isEmpty()}">
+    <a style="color: red">В магазине нет ни одной техники</a>
+</form>
+<div th:if="${!ShopItems.isEmpty()}" th:each="shopItem : ${ShopItems}">
+    <form th:method="GET" th:action="@{delete/{itemId}(itemId = ${shopItem.getShop_item_id()})}">
+        <p th:text="'Техника: ' + ${shopItem.getItem_id().getLabel()}
+        +' | Количество в магазине: '+ ${shopItem.getCount()}
+        +' | Цена: '+ ${shopItem.getItem_id().getItem_price()}
+        +' | Категория: '+ ${shopItem.getItem_id().getCategory_id().getCategory_title()}
+        +' | ID в системе: '+ ${shopItem.getItem_id().getItem_id()}"></p>
+        <input type="submit" value="удалить">
+    </form>
+</div>
+</body>
+</html>

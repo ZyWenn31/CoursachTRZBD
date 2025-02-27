@@ -11,6 +11,6 @@
     <input type="text" id="label" name="label">
     <input type="submit" value="Искать">
 </form>
-<a href="">На главную</a>
+<a th:href="@{/items/up/{id}(id = ${thisShop.getShop_id()})}">На страницу магазина</a>
 </body>
 </html>

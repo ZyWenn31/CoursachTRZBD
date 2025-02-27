@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete page</title>
+</head>
+<body>
+<p th:text="'Адрес магазина: ' + ${thisShop.getAddress()}"></p>
+<p th:text="'Техника: ' + ${shopItem.getItem_id().getLabel()} + ' | Категория: ' + ${shopItem.getItem_id().getCategory_id().getCategory_title()} + ' | Стоимость: ' + ${shopItem.getItem_id().getItem_price()}"></p>
+<a th:href="@{/items/up/{id}(id = ${thisShop.getShop_id()})}">На страницу магазина</a>
+<hr/>
+<form th:method="POST" th:action="@{/items/up/{id}/delete/{itemId}(id = ${thisShop.getShop_id()}, itemId = ${shopItem.getShop_item_id()})}" th:object="${shopItem}">
+    <label for="count" > Введите количество ушедшего товара: </label>
+    <input type="number" name="count" id="count" min="0" value="0" th:max="${shopItem.getCount()}">
+    <input type="submit" value="Удалить товар">
+</form>
+</body>
+</html>

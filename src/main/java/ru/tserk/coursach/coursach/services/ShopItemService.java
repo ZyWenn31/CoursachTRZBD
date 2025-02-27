@@ -38,4 +38,23 @@ public class ShopItemService {
             shopItemRepository.save(shopItem);
         }
     }
+
+    public List<ShopItem> findAllShopItemByShopId(Shop shop){
+        return shopItemRepository.findAllBySId(shop);
+    }
+
+    public ShopItem findShopItemById(int shopItemId){
+        return shopItemRepository.findById(shopItemId).orElse(null);
+    }
+
+    @Transactional
+    public void deleteShopItem(int count, int shopItemId){
+        ShopItem shopItem = shopItemRepository.findById(shopItemId).orElse(null);
+        if (count >= shopItem.getCount()){
+            shopItemRepository.deleteById(shopItemId);
+        } else {
+            shopItem.setCount(shopItem.getCount() - count);
+            shopItemRepository.save(shopItem);
+        }
+    }
 }

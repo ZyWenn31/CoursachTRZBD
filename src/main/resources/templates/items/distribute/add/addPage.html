@@ -7,6 +7,7 @@
 <body>
 <p th:text="'Адрес магазина: ' + ${thisShop.getAddress()}"></p>
 <p th:text="'Техника: ' + ${item.getLabel()} + ' | Категория: ' + ${item.getCategory_id().getCategory_title()} + ' | Стоимость: ' + ${item.getItem_price()}"></p>
+<a th:href="@{/items/up/{id}(id = ${thisShop.getShop_id()})}">На страницу магазина</a>
 <hr/>
 <form th:method="POST" th:action="@{/items/up/{id}/add/search/{itemId}(id = ${thisShop.getShop_id()}, itemId = ${item.getItem_id()})}">
     <label for="count" > Введите количество поступившего товара: </label>

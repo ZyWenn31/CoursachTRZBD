@@ -26,7 +26,7 @@
 <form th:if="${!shopItems.isEmpty()}">
     <div  th:each="shopItem : ${shopItems}">
         <a th:text="${shopItem.getItem_id().getLabel()} +
-        ' | Стоимость: ' + ${shopItem.getItem_id().getItem_price()} +
+        ' | Цена: ' + ${shopItem.getItem_id().getItem_price()} +
         ' | Количество товара в магазине: ' + ${shopItem.getCount()}" ></a>
     </div>
 </form>
