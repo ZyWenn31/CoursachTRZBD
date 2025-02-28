@@ -23,7 +23,7 @@
     <p>Выберите магазин</p>
     <div th:each="shop : ${shops}">
         <a th:href="@{up/{id}(id = ${shop.getShop_id()})}"
-           th:text="${shop.getAddress()} +' | director: '+ ${shop.getDirector_name()}"></a>
+           th:text="${shop.getAddress()} +' | Директор: '+ ${shop.getDirector_name()}"></a>
     </div>
 </form>
 </html>
