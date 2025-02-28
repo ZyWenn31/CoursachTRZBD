@@ -19,7 +19,7 @@
     <br/>
     <a href="">Отзывы</a>
     <p>Описание:</p>
-    <p th:text="${item.get().getDescription()}"></p>
+    <p th:text="${item.getDescription()}"></p>
 <!--    Ссылка на предыдущуу страницу-->
     <a href="/items/del">Назад</a>
     <div th:if="${!shops.isEmpty()}">
