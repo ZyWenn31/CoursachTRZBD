@@ -35,13 +35,13 @@ public class Item {
     @JoinColumn(name = "category", referencedColumnName = "category_id")
     private Category category_id;
 
-    @OneToMany(mappedBy = "itemId")
+    @OneToMany(mappedBy = "itemId", cascade = CascadeType.REMOVE)
     private List<OrderItem> orderItemList = new ArrayList<>();
 
     @OneToMany(mappedBy = "itId", cascade = CascadeType.REMOVE)
     private List<ShopItem> shopItemList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "item_id")
+    @OneToMany(mappedBy = "item_id", cascade = CascadeType.REMOVE)
     private List<Cart_item> cartItemList = new ArrayList<>();
 
 

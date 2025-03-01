@@ -6,7 +6,10 @@
 </head>
 <body>
 <p th:text="'Адрес магазина: ' + ${thisShop.getAddress()}"></p>
-<p th:text="'Техника: ' + ${shopItem.getItem_id().getLabel()} + ' | Категория: ' + ${shopItem.getItem_id().getCategory_id().getCategory_title()} + ' | Стоимость: ' + ${shopItem.getItem_id().getItem_price()}"></p>
+<p th:text="'Техника: ' + ${shopItem.getItem_id().getLabel()}
++ ' | Количество товара: ' + ${shopItem.getCount()}
++ ' | Категория: ' + ${shopItem.getItem_id().getCategory_id().getCategory_title()}
++ ' | Стоимость: ' + ${shopItem.getItem_id().getItem_price()}"></p>
 <a th:href="@{/items/up/{id}(id = ${thisShop.getShop_id()})}">На страницу магазина</a>
 <hr/>
 <form th:method="POST" th:action="@{/items/up/{id}/delete/{itemId}(id = ${thisShop.getShop_id()}, itemId = ${shopItem.getShop_item_id()})}" th:object="${shopItem}">
