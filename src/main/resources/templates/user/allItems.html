@@ -14,7 +14,9 @@
 </form>
 <div class="newClass">
     <form th:each="item : ${allItems}" th:if="${!allItems.isEmpty()}" th:action="@{itemInfo/{id}(id = ${item.getItem_id()})}" >
-        <img class="img" src="/images/2.png" alt="Фото товара">
+<!--        <img class="img" th:if="${item.getImage() != null}" th:src="@{'/upload/' + ${item.getImage()}}" alt="Фото товара">-->
+        <img class="img" th:if="${item.getImage() != null}" th:src="@{'/upload/' + ${item.getImage()}}" alt="Фото товара">
+        <img class="img" th:if="${item.getImage() == null}" src="/images/2.png" alt="Заглушка фото товара">
         <p th:text="' Техника: '+${item.getLabel()}"></p>
         <p th:text=" ' Категория: '+${item.getCategory_id().getCategory_title()}"></p>
         <p th:text="' Цена: '+${item.getItem_price()}"></p>

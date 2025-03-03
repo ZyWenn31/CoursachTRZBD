@@ -2,11 +2,17 @@ package ru.tserk.coursach.coursach.services;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 import ru.tserk.coursach.coursach.models.Item;
 import ru.tserk.coursach.coursach.repositories.ItemRepository;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @Transactional(readOnly = true) // delete read only
@@ -24,6 +30,31 @@ public class ItemService {
 
     @Transactional // delete
     public void save(Item item){
+        itemRepository.save(item);
+    }
+
+    @Transactional
+    public void saveWithPhoto(Item item, MultipartFile file){
+        String UPLOAD_DIR = "uploads/";
+        if (file.isEmpty()) {
+            item.setImage(null);
+        } else{
+            try {
+                // Создаем папку, если её нет
+                Files.createDirectories(Paths.get(UPLOAD_DIR));
+
+                // Генерируем уникальное имя файла
+                String fileName = UUID.randomUUID() + "_" + file.getOriginalFilename();
+                Path path = Paths.get(UPLOAD_DIR + fileName);
+
+                // Сохраняем файл
+                Files.write(path, file.getBytes());
+                item.setImage(fileName);
+
+            } catch (IOException e) {
+                System.out.println("Ошибка загрузки картинки");
+            }
+        }
         itemRepository.save(item);
     }
 

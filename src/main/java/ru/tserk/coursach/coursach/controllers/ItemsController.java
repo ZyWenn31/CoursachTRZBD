@@ -54,14 +54,14 @@ public class ItemsController {
 
     //ДОБАВИТЬ ПРОСМОТОР ВСЕХ СОЗДАННЫХ ТОВАРОВ
     @PostMapping("/add")
-    public String postNewItem(@ModelAttribute("item")@Valid Item item,  BindingResult bindingResult, Model model){
+    public String postNewItem(@ModelAttribute("item")@Valid Item item, @RequestParam("imageFile") MultipartFile file,  BindingResult bindingResult, Model model){
         itemValidator.validate(item, bindingResult);
         if (bindingResult.hasErrors()){
             model.addAttribute("categories", categoryService.findAll());
             return "items/newItem";
         }
 
-        itemService.save(item);
+        itemService.saveWithPhoto(item, file);
 
         return "redirect:/items/add";
     }
