@@ -112,7 +112,8 @@ public class ItemsController {
 
     @PostMapping("/edit/{id}")
     public String updatePerson(@ModelAttribute("item")@Valid Item item, BindingResult bindingResult,
-                               @PathVariable("id")int id, Model model){
+                               @PathVariable("id")int id, @RequestParam(value = "imageFile", required = false) MultipartFile file,
+                               Model model){
         editItemValidator.validate(item, bindingResult, id);
         if (bindingResult.hasErrors()){
             item.setItem_id(id);
@@ -120,7 +121,9 @@ public class ItemsController {
             return "items/itemPreEditInfo";
         }
 
-        itemService.updateItem(id, item);
+        if (file != null && !file.isEmpty()){
+            itemService.updateItemWithPhoto(id, file, item);
+        } else itemService.updateItem(id, item);
 
         return "redirect:/items/edit";
     }

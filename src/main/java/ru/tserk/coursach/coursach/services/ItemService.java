@@ -76,6 +76,13 @@ public class ItemService {
 
     @Transactional // delete
     public void delete(int id){
+        try {
+            // Генерируем уникальное имя файла
+            Path pathToDelete = Paths.get("uploads/" + itemRepository.getById(id).getImage());
+            Files.delete(pathToDelete);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         itemRepository.deleteById(id);
     }
 
@@ -88,6 +95,36 @@ public class ItemService {
         existingItem.setDescription(itemFields.getDescription());
         existingItem.setLabel(itemFields.getLabel());
 
+        itemRepository.save(existingItem);
+    }
+
+    @Transactional
+    public void updateItemWithPhoto(int id, MultipartFile file, Item item){
+
+        String UPLOAD_DIR = "uploads/";
+
+        Item existingItem = itemRepository.findById(id).orElse(null);
+
+        existingItem.setItem_price(item.getItem_price());
+        existingItem.setCategory_id(item.getCategory_id());
+        existingItem.setDescription(item.getDescription());
+        existingItem.setLabel(item.getLabel());
+
+
+        try {
+            // Генерируем уникальное имя файла
+            String fileName = UUID.randomUUID() + "_" + file.getOriginalFilename();
+            Path path = Paths.get(UPLOAD_DIR + fileName);
+
+            Path pathToDelete = Paths.get(UPLOAD_DIR + itemRepository.getById(id).getImage());
+            Files.delete(pathToDelete);
+
+            Files.write(path, file.getBytes());
+
+            existingItem.setImage(fileName);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         itemRepository.save(existingItem);
     }
 }
