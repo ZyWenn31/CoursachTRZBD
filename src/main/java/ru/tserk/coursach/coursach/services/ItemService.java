@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@Transactional(readOnly = true)
+@Transactional(readOnly = true) // delete read only
 public class ItemService {
 
     private final ItemRepository itemRepository;
@@ -22,11 +22,12 @@ public class ItemService {
         return itemRepository.findByLabel(label);
     }
 
-    @Transactional(readOnly = false)
+    @Transactional // delete
     public void save(Item item){
         itemRepository.save(item);
     }
 
+    // add @Transactional
     public Item findOneItem(int id){
         return itemRepository.findById(id).orElse(null);
     }
@@ -38,12 +39,12 @@ public class ItemService {
         return itemRepository.findByLabelStartingWith(item_label);
     }
 
-    @Transactional
+    @Transactional // delete
     public void delete(int id){
         itemRepository.deleteById(id);
     }
 
-    @Transactional
+    @Transactional // delete
     public void updateItem(int id, Item itemFields){
         Item existingItem = itemRepository.findById(id).orElse(null);
 

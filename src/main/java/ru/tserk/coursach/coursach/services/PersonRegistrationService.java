@@ -7,6 +7,7 @@ import ru.tserk.coursach.coursach.repositories.PersonRepository;
 import java.util.Optional;
 
 @Service
+// add @Transactional
 public class PersonRegistrationService {
     private final PersonRepository personRepository;
 

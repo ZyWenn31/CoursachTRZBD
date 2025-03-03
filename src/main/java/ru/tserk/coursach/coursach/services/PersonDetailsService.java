@@ -11,6 +11,7 @@ import ru.tserk.coursach.coursach.security.PersonDetails;
 import java.util.Optional;
 
 @Service
+// add @Transactional
 public class PersonDetailsService implements UserDetailsService {
 
     private final PersonRepository personRepository;
