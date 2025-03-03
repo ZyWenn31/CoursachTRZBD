@@ -1,6 +1,8 @@
 package ru.tserk.coursach.coursach.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cascade;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -30,6 +32,9 @@ public class Item {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "image")
+    private String image;
+
     @NotNull(message = "Укажите категорию")
     @ManyToOne
     @JoinColumn(name = "category", referencedColumnName = "category_id")
@@ -53,6 +58,7 @@ public class Item {
         this.item_price = item_price;
         this.description = description;
     }
+
 
     public int getItem_id() {
         return item_id;
@@ -116,6 +122,14 @@ public class Item {
 
     public void setCartItemList(List<Cart_item> cartItemList) {
         this.cartItemList = cartItemList;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     @Override

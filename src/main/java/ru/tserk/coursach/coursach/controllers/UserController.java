@@ -1,5 +1,6 @@
 package ru.tserk.coursach.coursach.controllers;
 
+import org.dom4j.rule.Mode;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -36,6 +37,13 @@ public class UserController {
         model.addAttribute("role", personDetails.getPerson().getRole());
         return "user/mainPage";
     }
+
+    @GetMapping("all")
+    public String allItems(Model model){
+        model.addAttribute("allItems", itemService.findAll());
+        return "user/allItems";
+    }
+
 
     //Страница поиска
     @GetMapping("/search")

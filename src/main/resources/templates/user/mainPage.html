@@ -7,7 +7,7 @@
 </head>
 <body>
 <p th:text="'Добро пожаловать, ' + ${person.getUsername()} + ', выберите что хотите сделать'"></p>
-<form method="get" action="/main/search">
+<form method="get" action="/main/all">
   <label for="search">Найти товары по названию: </label>
   <input type="submit" value="Поиск товаров" id="search">
 </form>

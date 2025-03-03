@@ -27,6 +27,10 @@ public class ItemService {
         itemRepository.save(item);
     }
 
+    public List<Item> findAll(){
+        return itemRepository.findAll();
+    }
+
     // add @Transactional
     public Item findOneItem(int id){
         return itemRepository.findById(id).orElse(null);
