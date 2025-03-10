@@ -51,11 +51,15 @@ public class UserController {
         return "user/allItems";
     }
 
-
     @GetMapping("/download-file")
-    public void downloadFile(HttpServletResponse response) throws IOException {
+    public void downloadFile(@RequestParam("role") String role, HttpServletResponse response) throws IOException {
         // Определяем имя файла по параметру type
-        String fileName = "sample.pdf";
+        String fileName;
+        if (role.equals("ROLE_ADMIN")) {
+            fileName = "admin.pdf";
+        } else {
+            fileName = "user.pdf";
+        }
 
         // Загружаем файл из ресурсов (например, из папки resources/static)
         Resource resource = new ClassPathResource("static/" + fileName);
