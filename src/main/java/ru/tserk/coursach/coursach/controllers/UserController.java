@@ -1,6 +1,8 @@
 package ru.tserk.coursach.coursach.controllers;
 
 import org.dom4j.rule.Mode;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -10,6 +12,11 @@ import ru.tserk.coursach.coursach.security.PersonDetails;
 import ru.tserk.coursach.coursach.services.ItemService;
 import ru.tserk.coursach.coursach.services.ShopItemService;
 import ru.tserk.coursach.coursach.services.ShopService;
+
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 @Controller
 @RequestMapping("/main")
@@ -44,6 +51,28 @@ public class UserController {
         return "user/allItems";
     }
 
+
+    @GetMapping("/download-file")
+    public void downloadFile(HttpServletResponse response) throws IOException {
+        // Определяем имя файла по параметру type
+        String fileName = "sample.pdf";
+
+        // Загружаем файл из ресурсов (например, из папки resources/static)
+        Resource resource = new ClassPathResource("static/" + fileName);
+        Path path = resource.getFile().toPath();
+        byte[] fileContent = Files.readAllBytes(path);
+
+        // Определяем content type в зависимости от типа файла
+        String contentType = "application/pdf";
+
+        // Устанавливаем заголовки ответа
+        response.setContentType(contentType);
+        response.setHeader("Content-Disposition", "inline; filename=" + fileName);
+
+        // Записываем содержимое файла в output stream ответа
+        response.getOutputStream().write(fileContent);
+        response.getOutputStream().flush();
+    }
 
     //Страница поиска
     @GetMapping("/search")
